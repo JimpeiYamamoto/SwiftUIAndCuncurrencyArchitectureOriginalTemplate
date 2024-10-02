@@ -13,9 +13,9 @@ public final class PokemonApi: PokemonApiType {
         self.apiClient = apiClient
     }
 
-    // apiClientで発生したエラーを基本的にそのままthrowさせて、decodeも基本全てOptionalで実施
+    // apiClientで発生したエラーを基本的にそのままthrowし、decodeの型は全てOptionalや空配列で実施
     public func getPokemonList(offset: Int) async throws -> PokemonApiModel.PokemonList {
-        // ProgressViewの挙動確認用で1s間Sleepさせる
+        // FIXME: ProgressViewの挙動確認用で1s間Sleepさせてるので、いつでも削除して良い
         sleep(1)
         return try await apiClient.request(url: URL(string: "https://pokeapi.co/api/v2/pokemon?offset=\(offset)")!)
     }

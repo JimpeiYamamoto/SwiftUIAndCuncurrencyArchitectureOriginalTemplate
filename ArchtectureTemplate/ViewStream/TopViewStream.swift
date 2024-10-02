@@ -27,6 +27,7 @@ public final class TopViewStream: ObservableObject {
                 outerState.isPresentLoadingView = false
             }
 
+            // 非同期処理のみバックグランドスレッドで実行するように指定
             let fetchResult = await Task.detached(priority: .background) {
                 await self.useCase.fetchPokemonList(
                     offset: self.innerState.fetchedPokemonsCount
@@ -54,40 +55,36 @@ public final class TopViewStream: ObservableObject {
 }
 
 public enum TopViewStreamModel {
+    // viewからの得られるイベントを管理するenum
     public enum Input {
         case onAppear
     }
 
-    public struct State {
-        // View側から直接参照せずにViewStream内で利用するState
-        fileprivate var inner: Inner
-        // View側から直接参照するState
-        public var outer: Outer
-    }
-}
+    // Viewで利用する値はOuterに定義
+    // ViewSream内でしか参照しない値はInnerに定義
+    public enum State {
+        public struct Outer {
+            public var pokemonList: [Pokemon]
+            public var isPresentLoadingView: Bool
+            public var isPresentErrorView: Bool
 
-extension TopViewStreamModel.State {
-    public struct Outer {
-        public var pokemonList: [Pokemon]
-        public var isPresentLoadingView: Bool
-        public var isPresentErrorView: Bool
-
-        public init(
-            pokemonList: [Pokemon],
-            isPresentLoadingView: Bool,
-            isPresentErrorView: Bool
-        ) {
-            self.pokemonList = pokemonList
-            self.isPresentLoadingView = isPresentLoadingView
-            self.isPresentErrorView = isPresentErrorView
+            public init(
+                pokemonList: [Pokemon],
+                isPresentLoadingView: Bool,
+                isPresentErrorView: Bool
+            ) {
+                self.pokemonList = pokemonList
+                self.isPresentLoadingView = isPresentLoadingView
+                self.isPresentErrorView = isPresentErrorView
+            }
         }
-    }
 
-    public struct Inner {
-        var fetchedPokemonsCount: Int
+        public struct Inner {
+            var fetchedPokemonsCount: Int
 
-        init(fetchedPokemonsCount: Int) {
-            self.fetchedPokemonsCount = fetchedPokemonsCount
+            init(fetchedPokemonsCount: Int) {
+                self.fetchedPokemonsCount = fetchedPokemonsCount
+            }
         }
     }
 }
