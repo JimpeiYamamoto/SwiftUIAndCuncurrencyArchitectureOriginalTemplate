@@ -11,7 +11,7 @@ import SwiftUI
 struct ArchtectureTemplateApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TopListView()
         }
     }
 }
