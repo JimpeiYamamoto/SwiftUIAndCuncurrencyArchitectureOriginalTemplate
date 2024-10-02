@@ -61,6 +61,7 @@
 		F2424A1A2CAD8D2100D2AB6C /* ArchtectureTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				F2424A392CADAE8400D2AB6C /* Assets */,
 				F2424A2A2CAD8D3600D2AB6C /* Utils */,
 				F2424A292CAD8D2E00D2AB6C /* Api */,
 				F2424A2F2CAD8F8300D2AB6C /* ApiGateway */,
@@ -68,8 +69,6 @@
 				F2424A362CAD973000D2AB6C /* ViewStream */,
 				F2424A332CAD938300D2AB6C /* View */,
 				F2424A1B2CAD8D2100D2AB6C /* ArchtectureTemplateApp.swift */,
-				F2424A1F2CAD8D2200D2AB6C /* Assets.xcassets */,
-				F2424A212CAD8D2200D2AB6C /* Preview Content */,
 			);
 			path = ArchtectureTemplate;
 			sourceTree = "<group>";
@@ -128,6 +127,15 @@
 				F2424A372CAD974D00D2AB6C /* TopViewStream.swift */,
 			);
 			path = ViewStream;
+			sourceTree = "<group>";
+		};
+		F2424A392CADAE8400D2AB6C /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F2424A212CAD8D2200D2AB6C /* Preview Content */,
+				F2424A1F2CAD8D2200D2AB6C /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,7 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ArchtectureTemplate/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ArchtectureTemplate/Assets/Preview Content\"";
 				DEVELOPMENT_TEAM = G9JXCB7X2L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -368,7 +376,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ArchtectureTemplate/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ArchtectureTemplate/Assets/Preview Content\"";
 				DEVELOPMENT_TEAM = G9JXCB7X2L;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
