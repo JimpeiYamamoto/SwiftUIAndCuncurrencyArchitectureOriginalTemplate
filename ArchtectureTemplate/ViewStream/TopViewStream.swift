@@ -4,13 +4,13 @@ public final class TopViewStream: ObservableObject {
 
     private let useCase: TopViewUseCaseType
 
-    @Published var outerState = TopViewStreamModel.State.Outer(
+    @Published var output = TopViewStreamModel.Output(
         pokemonList: [],
         isPresentLoadingView: false,
         isPresentErrorView: false
     )
 
-    var innerState = TopViewStreamModel.State.Inner(fetchedPokemonsCount: 0)
+    var state = TopViewStreamModel.State.Inner(fetchedPokemonsCount: 0)
 
     public init(useCase: TopViewUseCaseType) {
         self.useCase = useCase
@@ -22,33 +22,33 @@ public final class TopViewStream: ObservableObject {
     ) async {
         switch input {
         case .onAppear:
-            outerState.isPresentLoadingView = true
+            output.isPresentLoadingView = true
             defer {
-                outerState.isPresentLoadingView = false
+                output.isPresentLoadingView = false
             }
 
             // 非同期処理のみバックグランドスレッドで実行するように指定
             let fetchResult = await Task.detached(priority: .background) {
                 await self.useCase.fetchPokemonList(
-                    offset: self.innerState.fetchedPokemonsCount
+                    offset: self.state.fetchedPokemonsCount
                 )
             }.value
 
             switch fetchResult {
             case let .success(pokemonList):
-                outerState.isPresentErrorView = false
-                outerState.pokemonList +=  pokemonList
+                output.isPresentErrorView = false
+                output.pokemonList +=  pokemonList
                     .enumerated()
                     .map { offset, pokemon in
                         .init(
-                            id: offset + innerState.fetchedPokemonsCount,
+                            id: offset + state.fetchedPokemonsCount,
                             name: pokemon.name,
                             url: pokemon.urlText
                         )
                     }
-                innerState.fetchedPokemonsCount = outerState.pokemonList.count
+                state.fetchedPokemonsCount = output.pokemonList.count
             case .showErrorView:
-                outerState.isPresentErrorView = true
+                output.isPresentErrorView = true
             }
         }
     }
@@ -60,25 +60,24 @@ public enum TopViewStreamModel {
         case onAppear
     }
 
-    // Viewで利用する値はOuterに定義
-    // ViewSream内でしか参照しない値はInnerに定義
-    public enum State {
-        public struct Outer {
-            public var pokemonList: [Pokemon]
-            public var isPresentLoadingView: Bool
-            public var isPresentErrorView: Bool
+    // Viewへ描画する値を管理するStruct
+    public struct Output {
+        public var pokemonList: [Pokemon]
+        public var isPresentLoadingView: Bool
+        public var isPresentErrorView: Bool
 
-            public init(
-                pokemonList: [Pokemon],
-                isPresentLoadingView: Bool,
-                isPresentErrorView: Bool
-            ) {
-                self.pokemonList = pokemonList
-                self.isPresentLoadingView = isPresentLoadingView
-                self.isPresentErrorView = isPresentErrorView
-            }
+        public init(
+            pokemonList: [Pokemon],
+            isPresentLoadingView: Bool,
+            isPresentErrorView: Bool
+        ) {
+            self.pokemonList = pokemonList
+            self.isPresentLoadingView = isPresentLoadingView
+            self.isPresentErrorView = isPresentErrorView
         }
+    }
 
+    public enum State {
         public struct Inner {
             var fetchedPokemonsCount: Int
 
@@ -89,7 +88,7 @@ public enum TopViewStreamModel {
     }
 }
 
-extension TopViewStreamModel.State {
+extension TopViewStreamModel {
     public struct Pokemon: Identifiable {
         public let id: Int
         let name: String

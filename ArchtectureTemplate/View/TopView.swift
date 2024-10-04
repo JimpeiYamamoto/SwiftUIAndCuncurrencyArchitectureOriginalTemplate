@@ -6,14 +6,14 @@ struct TopListView: View {
 
     var body: some View {
         VStack {
-            if viewStream.outerState.isPresentLoadingView {
+            if viewStream.output.isPresentLoadingView {
                 ProgressView("読み込み中")
             } else {
-                if viewStream.outerState.isPresentErrorView {
+                if viewStream.output.isPresentErrorView {
                     Text("エラーです")
                 } else {
                     List {
-                        ForEach(viewStream.outerState.pokemonList) { pokemon in
+                        ForEach(viewStream.output.pokemonList) { pokemon in
                             Text("\(pokemon.name): \(pokemon.url)")
                         }
                     }
