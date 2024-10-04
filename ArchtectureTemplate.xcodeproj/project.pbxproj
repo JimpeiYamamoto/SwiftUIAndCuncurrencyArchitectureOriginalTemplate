@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2226DDD2CB067EB0075CBB4 /* ViewStremType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2226DDC2CB067EB0075CBB4 /* ViewStremType.swift */; };
 		F2424A1C2CAD8D2100D2AB6C /* ArchtectureTemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2424A1B2CAD8D2100D2AB6C /* ArchtectureTemplateApp.swift */; };
 		F2424A1E2CAD8D2100D2AB6C /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2424A1D2CAD8D2100D2AB6C /* TopView.swift */; };
 		F2424A202CAD8D2200D2AB6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2424A1F2CAD8D2200D2AB6C /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F2226DDC2CB067EB0075CBB4 /* ViewStremType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStremType.swift; sourceTree = "<group>"; };
 		F2424A182CAD8D2100D2AB6C /* ArchtectureTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArchtectureTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2424A1B2CAD8D2100D2AB6C /* ArchtectureTemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchtectureTemplateApp.swift; sourceTree = "<group>"; };
 		F2424A1D2CAD8D2100D2AB6C /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				F2424A372CAD974D00D2AB6C /* TopViewStream.swift */,
+				F2226DDC2CB067EB0075CBB4 /* ViewStremType.swift */,
 			);
 			path = ViewStream;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				F2424A2E2CAD8EAC00D2AB6C /* PokemonApi.swift in Sources */,
 				F2424A382CAD974D00D2AB6C /* TopViewStream.swift in Sources */,
 				F2424A312CAD8F9900D2AB6C /* PokemonApiGateway.swift in Sources */,
+				F2226DDD2CB067EB0075CBB4 /* ViewStremType.swift in Sources */,
 				F2424A2C2CAD8D4500D2AB6C /* ApiClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

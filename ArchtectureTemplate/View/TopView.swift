@@ -1,8 +1,11 @@
 import SwiftUI
 
-struct TopListView: View {
-    // ここのPresenterへの依存を上手く剥がせなかった〜〜
-    @StateObject var viewStream = TopViewStream(useCase: TopViewUseCase.shared)
+struct TopListView<Stream: TopViewStreamType>: View {
+    @StateObject var viewStream: Stream
+
+    public init(viewStream: Stream) {
+        _viewStream = StateObject(wrappedValue: viewStream)
+    }
 
     var body: some View {
         VStack {
@@ -29,5 +32,5 @@ struct TopListView: View {
 }
 
 #Preview {
-    TopListView()
+    TopListView(viewStream: TopViewStream.shared)
 }

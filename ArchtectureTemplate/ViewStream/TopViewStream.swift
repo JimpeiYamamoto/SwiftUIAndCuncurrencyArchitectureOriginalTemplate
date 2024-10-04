@@ -1,16 +1,22 @@
 import Foundation
 
-public final class TopViewStream: ObservableObject {
+public protocol TopViewStreamType: ViewStreamType
+where Output == TopViewStreamModel.Output,
+      Input == TopViewStreamModel.Input,
+      State == TopViewStreamModel.State
+{}
+
+public final class TopViewStream: TopViewStreamType {
 
     private let useCase: TopViewUseCaseType
 
-    @Published var output = TopViewStreamModel.Output(
+    @Published public var output = TopViewStreamModel.Output(
         pokemonList: [],
         isPresentLoadingView: false,
         isPresentErrorView: false
     )
 
-    var state = TopViewStreamModel.State.Inner(fetchedPokemonsCount: 0)
+    public var state = TopViewStreamModel.State(fetchedPokemonsCount: 0)
 
     public init(useCase: TopViewUseCaseType) {
         self.useCase = useCase
@@ -77,13 +83,11 @@ public enum TopViewStreamModel {
         }
     }
 
-    public enum State {
-        public struct Inner {
-            var fetchedPokemonsCount: Int
+   public struct State {
+        public var fetchedPokemonsCount: Int
 
-            init(fetchedPokemonsCount: Int) {
-                self.fetchedPokemonsCount = fetchedPokemonsCount
-            }
+        public init(fetchedPokemonsCount: Int) {
+            self.fetchedPokemonsCount = fetchedPokemonsCount
         }
     }
 }
